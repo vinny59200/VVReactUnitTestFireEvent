@@ -1,22 +1,24 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
 
 function App() {
+
+  const [number, setNumber] = useState("");
+
+	const handleInput = (e) => {
+		if (e.target.name === "number" && e.target.value) {
+			e.target.value = e.target.value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+		}
+		setNumber(e.target.value );
+	}
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <label className='labelnumber'>
+				Card Number: 
+				<input type="text" placeholder="e.g. 1234 5678 9123 0000" onChange={handleInput} name="number" className='card-input' minLength={19}  data-testid="hpi-number"/>
+			</label>
       </header>
     </div>
   );
